@@ -8,6 +8,8 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 import { SharedModule } from "../../../shared/shared.module";
+import { EditProfileComponent } from './edit-profile.component';
+import { TermsModalComponent } from './terms/terms-modal.component';
 
 @NgModule({
   imports: [
@@ -15,8 +17,11 @@ import { SharedModule } from "../../../shared/shared.module";
     FormsModule,
     IonicModule,
     ProfilePageRoutingModule,
-    SharedModule
-],
-  declarations: [ProfilePage]
+    SharedModule,
+
+    ],
+  declarations: [ProfilePage, EditProfileComponent, TermsModalComponent]
 })
-export class ProfilePageModule {}
+export class ProfilePageModule {
+
+}

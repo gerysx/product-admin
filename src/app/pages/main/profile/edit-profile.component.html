@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nueva contraseña</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Confirmar contraseña</ion-label>
+      <ion-input type="password" formControlName="confirmPassword"></ion-input>
+    </ion-item>
+  </form>
+
+  <ion-button expand="block" (click)="save()" [disabled]="form.invalid">
+    Guardar cambios
+  </ion-button>
+</ion-content>

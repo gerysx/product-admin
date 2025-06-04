@@ -2,6 +2,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { Router } from '@angular/router';
+import { EditProfileComponent } from './edit-profile.component';
+import { TermsModalComponent } from './terms/terms-modal.component';
 
 @Component({
   selector: 'app-profile',
@@ -12,49 +15,70 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class ProfilePage implements OnInit {
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
+  router = inject(Router);
 
-  ngOnInit() {}
+  user: User = null;
 
-  user(): User {
-    return this.utilsSvc.getFromLocalStorage('user');
+  ngOnInit() {
+    const userData = this.utilsSvc.getFromLocalStorage('user');
+    if (!userData) {
+      this.router.navigateByUrl('/auth');
+    }
+    this.user = userData;
   }
 
   async takeImage() {
     let loading;
     try {
-      let user = this.user();
-      let path = `users/${user.uid}`;
-      const dataUrl = (await this.utilsSvc.takePicture('Imagen del perfil')).dataUrl;
+      const dataUrl = (await this.utilsSvc.takePicture('Actualizar foto de perfil')).dataUrl;
 
-       loading = await this.utilsSvc.loading();
+      loading = await this.utilsSvc.loading('Subiendo imagen...');
       await loading.present();
 
+      const imagePath = `${this.user.uid}/profile`;
+      this.user.image = await this.firebaseSvc.uploadImage(imagePath, dataUrl);
 
-      let imagePath = `${user.uid}/profile`;
-      user.image = await this.firebaseSvc.uploadImage(imagePath, dataUrl);
-
-      await this.firebaseSvc.updateDocument(path, { image: user.image });
-      this.utilsSvc.saveInLocalStorage('user', user);
+      await this.firebaseSvc.updateDocument(`users/${this.user.uid}`, { image: this.user.image });
+      this.utilsSvc.saveInLocalStorage('user', this.user);
 
       this.utilsSvc.presentToast({
-        message: 'Imagen actualizada exitosamente',
+        message: 'Imagen de perfil actualizada',
         duration: 1500,
         color: 'success',
-        position: 'bottom',
         icon: 'checkmark-circle-outline',
       });
-
     } catch (err) {
-      console.error('Error al actualizar la imagen de perfil:', err);
+      console.error('Error al actualizar imagen:', err);
       this.utilsSvc.presentToast({
-        message: 'Error al actualizar el producto',
-        duration: 2000,
+        message: 'No se pudo actualizar la imagen',
         color: 'danger',
-        position: 'bottom',
-        icon: 'alert-circle-outline',
       });
     } finally {
       loading?.dismiss();
     }
   }
+
+ async editProfile() {
+  const success = await this.utilsSvc.presentModal({
+    component: EditProfileComponent,
+    cssClass: 'edit-profile-modal',
+  });
+  if (success) {
+    this.user = this.utilsSvc.getFromLocalStorage('user'); // Actualiza la vista
+  }
+}
+  viewTerms() {
+    this.utilsSvc.presentToast({ message: 'Términos y condiciones aún no disponibles' });
+  }
+
+  async logout() {
+    await this.firebaseSvc.signOut();
+  }
+
+  openTerms() {
+  this.utilsSvc.presentModal({
+    component: TermsModalComponent,
+    cssClass: 'terms-modal'
+  });
+}
 }

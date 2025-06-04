@@ -68,3 +68,13 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Archivos de Firebase locales
+.firebase/
+.firebaserc
+
+# Archivos de sistema / IDE
+.DS_Store
+node_modules/
+dist/
+.env

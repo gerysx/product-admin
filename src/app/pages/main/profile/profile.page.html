@@ -1,23 +1,38 @@
-<app-header [showMenu]="true" title="Perfil"></app-header>
-<ion-content class="ion-padding-top ion-text-center">
-  <ion-avatar>
-    <img *ngIf="user()?.image"[src]="user()?.image" />
-    <ion-icon *ngIf="!user()?.image" class="empty-icon" name="person-circle-outline"></ion-icon>
-  </ion-avatar>
-  <ion-button class="photo-btn" (click)="takeImage()" mode="ios" size="small" shape="round">
-    <ion-icon  name="camera-outline"></ion-icon>
-  </ion-button>
+<app-header [showMenu]="true" title="Mi Perfil"></app-header>
 
-  <h2>{{user().name}}</h2>
-  <div>Vendedor</div>
+<ion-content class="ion-padding profile-page">
 
-  <ion-item buttom detail>
-    <ion-icon  color="primary" slot="start" name="person-outline"></ion-icon>
-    <ion-label>Editar Perfil</ion-label>
-  </ion-item>
+  <div class="profile-header ion-text-center">
+    <ion-avatar class="profile-avatar">
+      <img *ngIf="user?.image" [src]="user.image" />
+      <ion-icon *ngIf="!user?.image" class="empty-icon" name="person-circle-outline"></ion-icon>
+    </ion-avatar>
 
-  <ion-item buttom detail>
-    <ion-icon color="primary" slot="start" name="document-outline"></ion-icon>
-    <ion-label>Terminos & Concdiciones</ion-label>
-  </ion-item>
+    <ion-button class="photo-btn" (click)="takeImage()" mode="ios" fill="clear">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-button>
+
+    <h2 class="user-name">{{ user?.name || 'Usuario sin nombre' }}</h2>
+    <p class="user-role">Vendedor registrado</p>
+  </div>
+
+  <ion-list class="profile-options">
+
+    <ion-item (click)="editProfile()" button>
+      <ion-icon slot="start" name="create-outline" color="primary"></ion-icon>
+      <ion-label>Editar Perfil</ion-label>
+    </ion-item>
+
+    <ion-item button detail (click)="openTerms()">
+  <ion-icon color="primary" slot="start" name="document-outline"></ion-icon>
+  <ion-label>Términos y condiciones</ion-label>
+</ion-item>
+
+
+    <ion-item (click)="logout()" button>
+      <ion-icon slot="start" name="log-out-outline" color="danger"></ion-icon>
+      <ion-label color="danger">Cerrar Sesión</ion-label>
+    </ion-item>
+
+  </ion-list>
 </ion-content>

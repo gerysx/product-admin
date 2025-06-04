@@ -11,6 +11,7 @@ import {
 } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Capacitor } from '@capacitor/core';
+import { getAuth } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +65,7 @@ export class UtilsService {
     spinner: 'crescent',
     message
   });
+
 }
 
   //=== TOAST ===//
@@ -98,4 +100,22 @@ export class UtilsService {
   dismissModal(data?: any) {
     return this.modalCtrl.dismiss(data);
   }
+
+  getSafeUid(): string | null {
+  const authUid = getAuth().currentUser?.uid;
+  const stored = this.getFromLocalStorage('user');
+
+  if (!authUid) {
+    console.warn('❌ No hay usuario autenticado');
+    return null;
+  }
+
+  if (!stored || stored.uid !== authUid) {
+    console.warn('⚠️ UID desincronizado, actualizando localStorage');
+    this.saveInLocalStorage('user', { ...stored, uid: authUid });
+  }
+
+  return authUid;
+}
+
 }
