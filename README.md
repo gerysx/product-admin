@@ -41,10 +41,7 @@ Este repositorio contiene un **ERP ** desarrollado como proyecto de fin de grado
 ##  Cómo usarlo
 
 1. Debes realizar el clonado `git clone https://github.com/tu-usuario/frontend-erp.git`
-
 2. Accede hasta tu carpeta`cd frontend-erp`
-   
 3. Abrir en tu editor de código y ejecutar en la termina`npm install`
-   
 4. Ejecuta este comando para lanzar el servidor`ng serve  `
 
