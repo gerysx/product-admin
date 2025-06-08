@@ -1,12 +1,12 @@
-# 📦 ERP de Ventas — Sistema de Gestión Empresarial
+#  ERP de Ventas — Sistema de Gestión Empresarial
 
 Este repositorio contiene un **ERP ** desarrollado como proyecto de fin de grado. Es un sistema completo de gestión de ventas, clientes, productos y usuarios con autenticación basada en roles, generación de facturas en PDF y despliegue en la nube. Puedes entrar como administrador para ver todas las funcionalidades: emaiL: pruebas@try.com password:Pruebas1234  **USO RESPONSABLE**
 
 ---
 
-## 🚀 Tecnologías Utilizadas
+##  Tecnologías Utilizadas
 
-### 🔧 Backend
+###  Backend
 - **Node.js** + **Express** — API RESTful
 - **Sequelize ORM** — Mapeo objeto-relacional
 - **PostgreSQL** — Base de datos relacional
@@ -14,7 +14,7 @@ Este repositorio contiene un **ERP ** desarrollado como proyecto de fin de grado
 - **Docker** — Entorno de contenedores
 - **Render** — Despliegue del backend
 
-### 🌐 Frontend
+###  Frontend
 - **Angular Standalone Components** — Estructura moderna y modular
 - **Bootstrap** + **Angular Material** — Interfaz limpia y responsiva
 - **Guards (`authGuard`, `roleGuard`)** — Control de acceso por rutas
@@ -22,14 +22,14 @@ Este repositorio contiene un **ERP ** desarrollado como proyecto de fin de grado
 
 ---
 
-## 🧩 Funcionalidades
+##  Funcionalidades
 
 - Registro e inicio de sesión con JWT
 - Control de accesos basado en roles: `admin`, `empleado`
 - Gestión completa de:
-  - 🧑 Clientes
-  - 📦 Productos
-  - 📜 Facturas
+  -  Clientes
+  -  Productos
+  -  Facturas
 - Generación de PDFs para facturas
 - Filtros dinámicos por fecha, cliente o producto
 - Validaciones avanzadas en formularios
