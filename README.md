@@ -38,9 +38,9 @@ Este repositorio contiene un **ERP ** desarrollado como proyecto de fin de grado
 
 ---
 
-## 🏗️ Cómo usarlo
-git clone https://github.com/tu-usuario/frontend-erp.git
-cd frontend-erp
-npm install
-ng serve  
+##  Cómo usarlo
+`git clone https://github.com/tu-usuario/frontend-erp.git`
+`cd frontend-erp`
+`npm install`
+`ng serve  `
 
